@@ -1,3 +1,8 @@
+/**
+ * Lyon Matthew U. Lao
+ * 2013-23785
+ */
+
 import javafx.application.Application;
 import javafx.event.*;
 import javafx.scene.*;
