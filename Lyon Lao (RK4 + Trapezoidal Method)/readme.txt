@@ -1,3 +1,10 @@
+/**
+ * Lyon Matthew U. Lao
+ * 2013-23785
+ */
+
+ Ayy, thanks for using my code. Here's a few stuff you might need to know.
+
 ---[ Before you use the program ]---
   * Please download mXparser from http://mathparser.org/, as this is a required dependency for reading the function strings. Nothing will work without it.
 
@@ -13,6 +20,8 @@
   * You are most likely concerned with using the program yourself for whatever it is you're doing, so to do that, simply add the appropriate .java file to your project's directory. RK4Class.java handles solving of a system of 2 ODEs using RK4, and TrapezoidalClass.java handles integration using the Composite Trapezoidal Method. Also, be sure to include the mxparser.jar in your project as well!
 
   * To actually call these classes, call the static methods associated with them (RK4Class.RK4() and TrapezoidalClass.Trapezoidal()). These return a 2D array of Doubles, but the only reason for this is that Java cannot return multiple things, much to my dismay. Really, this 2D array just contains 1D arrays, which contain the actual stuff you want.
+
+  * The Classes GUI, RK4Grid, and TrapezoidalGrid, are completely for the GUI, and are not important when using this code yourself.
 
   * Comments regarding the parameters and output variables used in the functions can be found in their .java files, so you know how to use them. However, I'll also list them down here.
 
@@ -71,6 +80,7 @@
               new_x = x + (C[0] * K1 + C[1] * K2 + C[2] * K3 + C[3] * K4) * h
           Example Usage of Non-Classical RK4:
             Double[] A = new Double[]; Double[][] B = new Double[][]; Double[] C = new Double[];
+            ...
             Double[][] return_values = RK4Class.RK4("y", "6*t", 0, 1, 0.5, 0, 0, A, B, C);
             tCoordinates = return_values[0];     // The coordinates of each t value at every h from A to B
             xCoordinates = return_values[1];     // The coordinates of the x(t) value for each of those t's
