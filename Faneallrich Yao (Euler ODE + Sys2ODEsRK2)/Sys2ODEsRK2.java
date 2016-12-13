@@ -97,13 +97,3 @@ public class Sys2ODEsRK2 {
       System.out.println(Arrays.deepToString(result));
   }
 }
-
-interface Callable {
-  public double compute (double time, double t, double c);
-}
-
-//class Cooling implements Callable {
-//  public double compute (double time, double t, double c) {
-//    return -0.07 * (t - 20);
-//  }
-//}
