@@ -1,3 +1,8 @@
+/**
+ * Lyon Matthew U. Lao
+ * 2013-23785
+ */
+
 import org.mariuszgromada.math.mxparser.*;
 
 public class RK4Class
