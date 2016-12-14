@@ -34,9 +34,8 @@ public class Sys2ODEsRK2 {
 
       for (int i = 1; i < n + 1; i++) {
         t += h;
-  	  //Double Ky1 = f.compute(t,y,z);
         Double Ky1 = (new Expression(f, new Argument("x", t), new Argument("y", y), new Argument("z", z))).calculate();
-  	  Double Kz1 = (new Expression(g, new Argument("x", t), new Argument("y", y), new Argument("z", z))).calculate();
+  	     Double Kz1 = (new Expression(g, new Argument("x", t), new Argument("y", y), new Argument("z", z))).calculate();
         Double Ky2 = (new Expression(f, new Argument("x", t + h), new Argument("y", y + Ky1 * h), new Argument("z", z + Kz1 * h))).calculate();
         Double Kz2 = (new Expression(g, new Argument("x", t + h), new Argument("y", y + Ky1 * h), new Argument("z", z + Kz1 * h))).calculate();
         y += (h/2) * (Ky1+Ky2);
@@ -57,9 +56,9 @@ public class Sys2ODEsRK2 {
     try{
       pp = new FileWriter("Sys2ODEsRK2.csv");
 
-      for (int i = 0; i <= Math.min(t.length, Math.min(y.length, z.length)); i++)
+      pp.append("iteration,x value,y value,z value\n");
+      for (int i = 0; i < Math.min(t.length, Math.min(y.length, z.length)); i++)
       {
-        pp.append("iteration,x value,y value,z value\n");
         pp.append(Double.toString(i) + ',' + Double.toString(t[i]) + ',' + Double.toString(y[i]) + ',' + Double.toString(z[i]) + '\n');
       }
     } catch(Exception e){
@@ -95,5 +94,6 @@ public class Sys2ODEsRK2 {
   	steps = s.nextDouble();
       Double[][] result = calculate (fun1,fun2,a,z,b,c,steps);
       System.out.println(Arrays.deepToString(result));
+      toCsvString(result[0], result[1], result[2]);
   }
 }
