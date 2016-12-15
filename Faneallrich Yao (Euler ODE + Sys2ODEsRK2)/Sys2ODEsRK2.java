@@ -50,17 +50,29 @@ public class Sys2ODEsRK2 {
   	return result;
   }
 
-  public static void toCsvString (Double[] t, Double[] y, Double[] z)
+  public static String toCsvString (Double[] t, Double[] y, Double[] z)
+  {
+    String retstr = new String();
+    retstr += "iteration,x value,y value,z value\n";
+    for (int i = 0; i < Math.min(t.length, Math.min(y.length, z.length)); i++)
+    {
+      retstr += Double.toString(i) + ',' + Double.toString(t[i]) + ',' + Double.toString(y[i]) + ',' + Double.toString(z[i]) + '\n';
+    }
+    return retstr;
+  }
+
+  public static void printCsv()
+  {
+    printCsv("Sys2ODEsRK2.csv");
+  }
+
+  public static void printCsv(String filename, Double[] t, Double[] y, Double[] z)
   {
     FileWriter pp = null;
-    try{
-      pp = new FileWriter("Sys2ODEsRK2.csv");
+    try {
+      pp = new FileWriter(filename);
 
-      pp.append("iteration,x value,y value,z value\n");
-      for (int i = 0; i < Math.min(t.length, Math.min(y.length, z.length)); i++)
-      {
-        pp.append(Double.toString(i) + ',' + Double.toString(t[i]) + ',' + Double.toString(y[i]) + ',' + Double.toString(z[i]) + '\n');
-      }
+      pp.append(toCsvString(t, y, z));
     } catch(Exception e){
         e.printStackTrace();
     } finally {
@@ -94,6 +106,6 @@ public class Sys2ODEsRK2 {
   	steps = s.nextDouble();
       Double[][] result = calculate (fun1,fun2,a,z,b,c,steps);
       System.out.println(Arrays.deepToString(result));
-      toCsvString(result[0], result[1], result[2]);
+      printCsv(result[0], result[1], result[2]);
   }
 }
