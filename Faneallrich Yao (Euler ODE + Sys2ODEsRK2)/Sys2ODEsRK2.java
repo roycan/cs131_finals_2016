@@ -50,7 +50,7 @@ public class Sys2ODEsRK2 {
   	return result;
   }
 
-  public static void toCsvString (Double[] t, Double[] y, Double[] z)
+  public static String toCsvString (Double[] t, Double[] y, Double[] z)
   {
     String retstr = new String();
     retstr += "iteration,x value,y value,z value\n";
@@ -58,6 +58,7 @@ public class Sys2ODEsRK2 {
     {
       retstr += Double.toString(i) + ',' + Double.toString(t[i]) + ',' + Double.toString(y[i]) + ',' + Double.toString(z[i]) + '\n';
     }
+    return retstr;
   }
 
   public static void printCsv()
