@@ -1,4 +1,6 @@
 import org.mariuszgromada.math.mxparser.*;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class Prob5
 {
@@ -46,14 +48,72 @@ public class Prob5
     {
       Double lowerBound = guess1;
       Double upperBound = guess2;
+
       Double[][] lowerResult = Sys2ODEsRK2.calculate(dT, dw, T0, lowerBound, 0.0, 0.1, 0.01);
+      Double[] lowerT = lowerResult[1];
+      Double lowerTL = lowerT[lowerT.length - 1];
+
       Double[][] upperResult = Sys2ODEsRK2.calculate(dT, dw, T0, upperBound, 0.0, 0.1, 0.01);
+      Double[] upperT = upperResult[1];
+      Double upperTL = upperT[upperT.length - 1];
+
+      Double slope = (upperTL - lowerTL)/(upperBound - lowerBound);
+
+      System.out.println(lowerTL);
+      System.out.println(upperTL);
+
+      /* I assume that the line is linear, so I draw a line between the two points
+       * Since secant tries to converge to 0 however, I have to subtract TL so that it will converge there instead. */
+      Sec ng = new Sec(String.format("f(x) = %f * (x - %f) + %f - %f", slope, lowerBound, lowerTL, TL),
+                        String.format("Xa = %f", lowerBound),
+                        String.format("Xb = %f", upperBound),
+                        String.format("err = %f", 0.000001),
+                        String.format("imax = %d", 100000)
+                        );
+      Double newGuess = ng.Answer();
+      Double[][] newResult = Sys2ODEsRK2.calculate(dT, dw, T0, newGuess, 0.0, 0.1, 0.01);
+      Double[] newT = newResult[1];
+      Double newTL = newT[newT.length - 1];
+
+      Double[] xValues = newResult[0];
+
+      String[] titles = {"x", "w(0) = -1000", "w(0) = -3500", String.format("w(0) = %f\n", newGuess)};
+      Double[][] values = {xValues, lowerT, upperT, newT};
+      printCSV("Prob5.csv", titles, values);
+    }
+
+    public static void printCSV(String filename, String[] titles, Double[][] values)
+    {
+      try
+      {
+        PrintWriter outputfile = new PrintWriter(filename, "UTF-8");
+        for (int i = 0; i < titles.length; i++)
+        {
+          outputfile.print(titles[i]);
+          outputfile.print(",");
+        }
+        outputfile.print("\n");
+        for (int j = 0; j < values[0].length; j++)
+        {
+          for (int i = 0; i < values.length; i++)
+          {
+            outputfile.print(values[i][j]);
+            outputfile.print(",");
+          }
+          outputfile.print("\n");
+        }
+        outputfile.close();
+      }
+      catch (IOException e)
+      {
+        System.out.println("Error writing to file " + filename + "!");
+      }
     }
 
     public static void main(String[] args)
     {
       Prob5 prob5 = new Prob5();
       prob5.setProblemParameters();
-
+      prob5.calculate(-1000.0, -3500.0);
     }
 }
