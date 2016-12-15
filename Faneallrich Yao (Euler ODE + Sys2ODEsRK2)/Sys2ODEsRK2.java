@@ -61,9 +61,9 @@ public class Sys2ODEsRK2 {
     return retstr;
   }
 
-  public static void printCsv()
+  public static void printCsv(Double[] t, Double[] y, Double[] z)
   {
-    printCsv("Sys2ODEsRK2.csv");
+    printCsv("Sys2ODEsRK2.csv", t, y, z);
   }
 
   public static void printCsv(String filename, Double[] t, Double[] y, Double[] z)
