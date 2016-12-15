@@ -21,12 +21,11 @@ import java.io.IOException;
  */
 
 public class RungeKutta {
-    static Function y; //the equation
-    static Argument yInit; //initial value of y
-    static Argument a; //first value of x
-    static Argument b; //last value of x
-    static Argument h; //step size;
-    static Expression ODE;
+    String y; //the equation
+    String yInit; //initial value of y
+    String a; //first value of x
+    String b; //last value of x
+    String h; //step size;
 
     double x_values[];
     double y_values[];
@@ -46,14 +45,6 @@ public class RungeKutta {
 
     public RungeKutta() {
         InitUI();
-
-        a = new Argument("x = 0");
-        b = new Argument("x = 5");
-        h = new Argument("h = 1");
-        y = new Function("f(x,y) = x + y");
-        yInit = new Argument("yInit = 0");
-
-        Expression e = new Expression("y", y);
     }
 
     private void GetAnswer() {
@@ -65,32 +56,12 @@ public class RungeKutta {
 
             bw.write("x," + "y" + "\n");
 
-            int iterations = (int) ((b.getArgumentValue() - a.getArgumentValue()) / h.getArgumentValue()) + 1;
-            x_values = new double[iterations + 1];
-            y_values = new double[iterations + 1];
+            RK rk = new RK(y, yInit, a, b, h);
+            x_values = rk.x();
+            y_values = rk.y();
 
-            x_values[0] = a.getArgumentValue();
-            y_values[0] = yInit.getArgumentValue();
-
-            bw.write(x_values[0] + ", " + y_values[0] + '\n');
-
-            for(int i = 1; i <= iterations ; i++) {
-                a.setArgumentValue(a.getArgumentValue() + h.getArgumentValue());
-                Expression e = new Expression("y", y);
-                //mXparser.consolePrintln(e.calculate());
-
-                x_values[i] = x_values[i-1] + h.getArgumentValue();
-                double K1 = y.calculate(x_values[i-1], y_values[i-1]);
-                double xhalf = x_values[i-1] + h.getArgumentValue()/2;
-                double yK1 = y_values[i-1] + (K1 * h.getArgumentValue()/2);
-                double K2 = y.calculate(xhalf, yK1);
-                double yK2 = y_values[i-1] + (K2 * h.getArgumentValue()/2);
-                double K3 = y.calculate(xhalf, yK2);
-                double yK3 = y_values[i-1] + (K3 * h.getArgumentValue()/2);
-                double K4 = y.calculate(x_values[i], yK3);
-                y_values[i] = y_values[i-1] + (K1 + 2*K2 + 2*K3 + K4)*h.getArgumentValue()/6;
-                mXparser.consolePrintln(x_values[i] + " " + y_values[i]);
-                bw.write(x_values[i] + ", " + y_values[i] + '\n');
+            for (int i = 0; i < x_values.length; i++) {
+                bw.write(x_values[i] + "," + y_values[i] + '\n');
             }
         }
 
@@ -147,11 +118,11 @@ public class RungeKutta {
 
         computeBox.addActionListener(new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                a = new Argument(aBox.getText());
-                b = new Argument(bBox.getText());
-                h = new Argument(hBox.getText());
-                y = new Function(odeBox.getText());
-                yInit = new Argument(yInitBox.getText());
+                y = odeBox.getText();
+                yInit = yInitBox.getText();
+                a = aBox.getText();
+                b = bBox.getText();
+                h = hBox.getText();
 
                 GetAnswer();
             }
