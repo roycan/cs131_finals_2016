@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /*
 -This is used to operate the Sys2ODEsRK4.java file
@@ -36,13 +39,41 @@ public class driverRK4{
 		y[1] = Double.parseDouble(scan.nextLine());
 		
 		Sys2ODEsRK4.f(n, h, x, y, t);
+		FileWriter pp = null;
+	try{
+		pp = new FileWriter("Sys2ODEsRK4.csv");
+
+		pp.append("iteration");
+		pp.append(',');
+		pp.append("x value");
+		pp.append(',');
+		pp.append("y value");
+		pp.append('\n');
 		for (int i=1;i<=n+1;i++){
+			pp.append(Double.toString(i));
+			pp.append(',');
+			pp.append(Double.toString(t[i]));
+			pp.append(',');
+			pp.append(Double.toString(x[i]));
+			pp.append(',');
+			pp.append(Double.toString(y[i]));
+			pp.append('\n');
 			System.out.print(i);
+			System.out.print(" t" + i + ": " + t[i]);
 			System.out.print(" x" + i + ": " + x[i]);
 			System.out.print(" y" + i + ": " + y[i]);
 			System.out.print("\n");
 		}
-		System.out.print("x(n+1): " + x[n+1] + "\n");
-		System.out.print("y(n+1): " + y[n+1] + "\n");
+	}catch(Exception e){
+		e.printStackTrace();
+	
+	} finally {
+		try{
+			pp.flush();
+			pp.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
+}
 }

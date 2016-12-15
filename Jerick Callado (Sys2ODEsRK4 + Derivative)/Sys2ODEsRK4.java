@@ -11,8 +11,8 @@ public class Sys2ODEsRK4{
 		for(int i=1; i<n+1; i++){
 			t[i+1] = t[i] + h;
 			tm = t[i] + h/2;
-			Kx1 = ODE1.f(t[1],x[1],y[1]);
-			Ky1 = ODE2.f(t[1],x[1],y[1]);
+			Kx1 = ODE1.f(t[i],x[i],y[i]);
+			Ky1 = ODE2.f(t[i],x[i],y[i]);
 			
 			Kx2 = ODE1.f(tm, x[i]+Kx1*h/2, y[i]+Ky1*h/2);
 			Ky2 = ODE2.f(tm, x[i]+Kx1*h/2, y[i]+Ky1*h/2);
