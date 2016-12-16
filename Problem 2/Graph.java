@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class SimpleGraph extends JFrame {
+public class Graph extends JFrame {
     private final int WIDTH = 720;
     private final int HEIGHT = 500;
     private Container drawable;
@@ -9,7 +9,7 @@ public class SimpleGraph extends JFrame {
     double SCALE = 30;   // Size of the graph
     int OFFSET = 120;
 
-    public SimpleGraph(Double[] xData, Double[] yData) {
+    public Graph(Double[] xData, Double[] yData) {
         super("Graph");
         drawable = getContentPane();
         canvas = new GraphCanvas(xData, yData);

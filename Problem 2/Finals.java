@@ -5,7 +5,7 @@
  * 
  *
  * To run:
- * $ javac -cp ":mxparser.jar" Finals.java RK4Class.java SimpleGraph.java
+ * $ javac -cp ":mxparser.jar" Finals.java RK4Class.java Graph.java
  * $ java -cp ":mxparser.jar" Finals
  * 
  * Results are stored in text.csv
@@ -33,7 +33,7 @@ public class Finals {
         Double[] x_values = answers[1];
         Double[] y_values = answers[2];
         
-        Frame frm = new SimpleGraph(t_values, x_values);
+        Frame frm = new Graph(t_values, x_values);
         frm.show();
 
         FileWriter fw = null;
