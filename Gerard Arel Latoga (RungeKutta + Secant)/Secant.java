@@ -21,13 +21,13 @@ import java.io.IOException;
  */
 
 public class Secant {
-    static Function y; //the equation
-    static Argument yInit; //initial value of y
-    static Argument a; //first value of x
-    static Argument b; //last value of x
-    static Argument err; //step size;
-    static Argument imax; //max iters
-    static Expression FUN;
+    static String y; //the equation
+    static String yInit; //initial value of y
+    static String a; //first value of x
+    static String b; //last value of x
+    static String err; //step size;
+    static String imax; //max iters
+    static String FUN;
 
     double x_values[];
     double y_values[];
@@ -58,52 +58,9 @@ public class Secant {
             bw = new BufferedWriter(fw);
 
             bw.write("function, Xa, Xb, Error, iMax, Answer\n");
-
-            double Xa = a.getArgumentValue();
-            double Xb = b.getArgumentValue();
-            double Xi;
-
-            System.out.println((int)a.getArgumentValue());
-
-            if (Xa <= 0 && 0 < Xb) {
-                Xa = 0;
-            }
-
-            if (y.calculate(Xa) == 0 || y.calculate(Xb) == 0) {
-                bw.write(y.getFunctionExpressionString() + ", " +
-                        String.format("%.2f", a.getArgumentValue()) + ", " +
-                        String.format("%.2f", b.getArgumentValue()) + ", " +
-                        String.format("%.2f", err.getArgumentValue()) + ", " +
-                        String.format("%.2f", imax.getArgumentValue()) + ", " +
-                        "0" + '\n');
-            }
-            else {
-                for (i = 0; i < (int) imax.getArgumentValue(); i++) {
-                    double FunXb = y.calculate(Xb);
-                    Xi = Xb - FunXb*(Xa-Xb)/(y.calculate(Xa) - FunXb);
-                    System.out.println(y.calculate(Xa));
-                    if (Math.abs((Xi - Xb) / Xb) < err.getArgumentValue()) {
-                        bw.write(y.getFunctionExpressionString() + ", " +
-                                String.format("%.2f", a.getArgumentValue()) + ", " +
-                                String.format("%.2f", b.getArgumentValue()) + ", " +
-                                String.format("%.2f", err.getArgumentValue()) + ", " +
-                                String.format("%.2f", imax.getArgumentValue()) + ", " +
-                                String.format("%.5f",Xi) + '\n');
-                        break;
-                    }
-                    Xa = Xb;
-                    Xb = Xi;
-                }
-                if (i == (int) imax.getArgumentValue()) {
-                    bw.write(y.getFunctionExpressionString() + ", " +
-                            String.format("%.2f", a.getArgumentValue()) + ", " +
-                            String.format("%.2f", b.getArgumentValue()) + ", " +
-                            String.format("%.2f", err.getArgumentValue()) + ", " +
-                            String.format("%.2f", imax.getArgumentValue()) + ", " +
-                            imax.getArgumentExpressionString() + ", " +
-                            "no answer" + '\n');
-                }
-            }
+           
+            Sec sec = new Sec(y, a, b, err, imax);
+            bw.write(y + "," + a + ","  + b  + "," + err  + "," + imax  + "," + sec.Answer() + '\n');
         }
 
         catch (IOException e) {
@@ -159,12 +116,11 @@ public class Secant {
 
         computeBox.addActionListener(new ActionListener() {
             public void actionPerformed (ActionEvent e) {
-                a = new Argument(aBox.getText());
-                b = new Argument(bBox.getText());
-                err = new Argument(errBox.getText());
-                imax = new Argument(imaxBox.getText());
-                y = new Function(funBox.getText());
-
+                y = funBox.getText();
+                a = aBox.getText();
+                b = bBox.getText();
+                err = errBox.getText();
+                imax = imaxBox.getText();
                 GetAnswer();
             }
         });
