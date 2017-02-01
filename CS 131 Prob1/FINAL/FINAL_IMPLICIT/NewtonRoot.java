@@ -11,84 +11,72 @@ import org.mariuszgromada.math.mxparser.Argument;
  *
  * @author hp
  */
-public class NewtonRoot {
-    public static double NewtonRoot(Function Fun, Function FunDer, double Xest, double Err, int imax) throws ArithmeticException{
-        /*
-        NewtonRoot finds the root of Fun = 0 near the point Xest using Newton's Method.
-        
-        Input Variables:
-        Fun - Object of class Function with a user-defined method that calculates Fun for a given x.
-        FunDer - Object of class Function with a user-defined method that calculates the dericative of Fun for a given x.
-        Xest - Initial estimate of the solution.
-        Err - Maximum Error.
-        imax - Maximum number of iterations.
-        
-        Return:
-        The root of Fun, |Fun| < Err, if found in or under imax iterations.
-        
+public class NewtonRoot
+{
+    public static double doNewtonRoot(Function func, Function funcDer, double solEst, double maxErr, int iterMax) throws ArithmeticException
+    {
+        /**
+        *Finds the root of a given function func near the point solEst using Newton's Method.
+        *@param func Object of class Function with a user-defined method that calculates func for a given x.
+        *@param funcDer Object of class Function with a user-defined method that calculates the derivative of func for a given x.
+        *@param solEst Initial estimate and eventually succeeding estimates of the solution.
+        *@param maxErr Maximum error given by the user.
+        *@param iterMax Maximum number of iterations to apply Newton Method.
+        *@return currEst Current estimate of the root of the function if |func| < maxErr, if found in or under iterMax iterations.
+        *@exception ArithmeticException Solution is not obtained in or under iterMax iterations.
         */
-        double Xi;
+        
+        double currEst;
         int i;
-        for(i = 0; i < imax; i++){
-            Xi = Xest - Fun.f(Xest) / FunDer.f(Xest);
-            if(Math.abs((Xi - Xest) / Xest) < Err || Math.abs(Xi) < Err){
-                return Xi;
+        for(i = 0; i < iterMax; i++){
+            currEst = solEst - func.f(solEst) / funcDer.f(solEst);
+            if(Math.abs((currEst - solEst) / solEst) < maxErr || Math.abs(currEst) < maxErr){
+                return currEst;
             }
-            Xest = Xi;
+            solEst = currEst;
         }
         System.out.println("Solution was not obtained in " + Integer.toString(i) + "iterations.");
         throw new ArithmeticException("No answer");
     }
     
-    //Overloaded convinience function for when Fun and FunDer is provided as a String expression for Fun(x), Fun'(x)
-    public static double NewtonRoot(String Fun, String FunDer, double Xest, double Err, int imax) throws ArithmeticException{
-        /*
-        NewtonRoot finds the root of Fun = 0 near the point Xest using Newton's Method.
-        
-        Input Variables:
-        Fun - Object of class Function with a user-defined method that calculates Fun for a given x.
-        FunDer - Object of class Function with a user-defined method that calculates the dericative of Fun for a given x.
-        Xest - Initial estimate of the solution.
-        Err - Maximum Error.
-        imax - Maximum number of iterations.
-        
-        Return:
-        The root of Fun, |Fun| < Err, if found in or under imax iterations.
-        
+    public static double doNewtonRoot(String funcStr, String funcDerStr, double solEst, double maxErr, int iterMax) throws ArithmeticException
+    {
+        /**
+        *Overloaded convenience function for when func and funcDer is provided as a String expression for Func(x), Func'(x)
         */
         
         Argument x = new Argument("x");
-        Argument y = new Argument("y = " + Fun,x);
-        Function f = new Function(){
-            Argument x_ = x;
-            Argument y_ = y;
+        Argument y = new Argument("y = " + funcStr,x);
+        Function func = new Function(){
+            Argument xFunc = x;
+            Argument yFunc = y;
             @Override
             public double f(double vars) {
-                x_.setArgumentValue(vars);
-                return y_.getArgumentValue();
+                xFunc.setArgumentValue(vars);
+                return yFunc.getArgumentValue();
             }
         };
         
-        Argument xNew = new Argument("x");
-        Argument yNew = new Argument("y = " + FunDer,x);
-        Function fd = new Function(){
-            Argument x_ = xNew;
-            Argument y_ = yNew;
+        Argument xDer = new Argument("x");
+        Argument yDer = new Argument("y = " + funcDerStr,x);
+        Function funcDer = new Function(){
+            Argument xFuncDer = xDer;
+            Argument yFuncDer = yDer;
             @Override
             public double f(double vars) {
-                x_.setArgumentValue(vars);
-                return y_.getArgumentValue();
+                xFuncDer.setArgumentValue(vars);
+                return yFuncDer.getArgumentValue();
             }
         };
         
-        double Xi;
+        double currEst;
         int i;
-        for(i = 0; i < imax; i++){
-            Xi = Xest - f.f(Xest) / fd.f(Xest);
-            if(Math.abs((Xi - Xest) / Xest) < Err || Math.abs(Xi) < Err){
-                return Xi;
+        for(i = 0; i < iterMax; i++){
+            currEst = solEst - func.f(solEst) / funcDer.f(solEst);
+            if(Math.abs((currEst - solEst) / solEst) < maxErr || Math.abs(currEst) < maxErr){
+                return currEst;
             }
-            Xest = Xi;
+            solEst = currEst;
         }
         System.out.println("Solution was not obtained in " + Integer.toString(i) + "iterations.");
         throw new ArithmeticException("No answer");
