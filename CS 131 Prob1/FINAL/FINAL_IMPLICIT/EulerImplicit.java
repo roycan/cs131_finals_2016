@@ -21,7 +21,7 @@ public class EulerImplicit {
 		newtonN = 250; // number of iterations for newton
 
 		double[] n = new double[251];
-    double[] t = new double[251];
+        double[] t = new double[251];
 
 		n[1] = 2000; t[1] = firstNum;
 
@@ -34,7 +34,7 @@ public class EulerImplicit {
         String fun = "x + x^(3/2) * " + fun_component2 + " + " + fun_component1;
         String funDer = "1 + x^(1/2) * (3/2) * " + fun_component2;
 
-        n[i+1] = NewtonRoot.NewtonRoot(fun, funDer, n[i], 0.001, newtonN);
+        n[i+1] = NewtonRoot.doNewtonRoot(fun, funDer, n[i], 0.001, newtonN);
 		}
 
 
