@@ -42,6 +42,26 @@ public class Prob4GUI extends javax.swing.JFrame {
     private javax.swing.JTextField myjTextField4;
     private javax.swing.JTextField myjTextField5;
 
+    /** Runs the program */
+    public static void main(String args[]) {
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Prob4GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
+        java.awt.EventQueue.invokeLater(() -> {
+            new Prob4GUI().setVisible(true);
+        });
+
+    }
+
     /** Initializes the necessary GUI components */
     private void initComponents() {
 
@@ -209,26 +229,6 @@ public class Prob4GUI extends javax.swing.JFrame {
     /** Calls the components */
     public Prob4GUI() {
         initComponents();
-    }
-
-    /** Running the program */
-    public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Prob4GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            new Prob4GUI().setVisible(true);
-        });
-
     }
 
 }
