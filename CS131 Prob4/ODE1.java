@@ -1,7 +1,5 @@
-/*
--read driverRK4 for instructions
--returns the value of the function after substitution
-*/
+/** Contains the formula for the first ordinary differential equation
+  */
 
 public class ODE1{
 	public static double f(double t, double x, double y){

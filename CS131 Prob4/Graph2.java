@@ -1,3 +1,7 @@
+/** Traces a single curve which shows how the x-values vary with respect to the change in the y-values
+    and vice versa by plotting the x-values in the x-axis and y-values in the y-axis.
+*/    
+
 import java.awt.event.ActionEvent;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -10,29 +14,37 @@ import javafx.stage.Stage;
  
  
 public class Graph2 extends Application {
-    private static Double[] x, y;
-    private static String xName, yName, title;
-    private static double n;
+    private static Double[] theXValues, theYValues;
+    private static String theXAxisLabel, theYAxisLabel, theTitle;
+    private static double theNumTimeIntervals;
     
-    public void init (Double[] x, Double[] y, double n, String xName, String yName, String title) {
-        Graph2.x = x; Graph2.y = y; Graph2.xName = xName; Graph2.yName = yName;
-        Graph2.title = title; Graph2.n = n;
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public void setInitialGraphValues (Double[] x, Double[] y, double n, String xName, String yName, String title) {
+        Graph2.theXValues = x; 
+        Graph2.theYValues = y; 
+        Graph2.theXAxisLabel = xName; 
+        Graph2.theYAxisLabel = yName;
+        Graph2.theTitle = title; 
+        Graph2.theNumTimeIntervals = n;
         main(null);
     }
     
     @Override public void start(Stage stage) {
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel(xName);
-        yAxis.setLabel(yName);
+        xAxis.setLabel(theXAxisLabel);
+        yAxis.setLabel(theYAxisLabel);
         
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
                 
-        lineChart.setTitle(title);
+        lineChart.setTitle(theTitle);
                                 
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
         for (int i=1; i<n+1; i++){
-            series.getData().add(new XYChart.Data<Number, Number>(x[i], y[i]));
+            series.getData().add(new XYChart.Data<Number, Number>(theXValues[i], theYValues[i]));
         }
         
         Scene scene  = new Scene(lineChart,800,600);
@@ -42,7 +54,4 @@ public class Graph2 extends Application {
         stage.show();
     }
  
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

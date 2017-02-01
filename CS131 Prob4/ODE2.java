@@ -1,7 +1,5 @@
-/*
--read driverRK4 for instructions
--returns the value of the function after substitution
-*/
+/** Contains the formula for the second ordinary differential equation
+  */
 
 public class ODE2{
 	public static double f(double t, double x, double y){
