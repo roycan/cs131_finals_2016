@@ -20,46 +20,46 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Finals {
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
         RK4Class rk = new RK4Class();
-        Double a = 0d;
-        Double b = 18d;
-        Double h = 0.25d;
-        Double x1 = Math.PI/2d;
-        Double y1 = 0d;
-        Double [][] answers = rk.RK4("y", "-(0.16/0.5)*y - (9.81/1.2)*sin(x)", a, b, h, x1, y1);      
+        Double first_t = 0d;
+        Double last_t = 18d;
+        Double incrementSize = 0.25d;
+        Double initial_x = Math.PI/2d;
+        Double initial_y = 0d;
+        Double [][] answers = rk.RK4( "y", "-(0.16/0.5)*y - (9.81/1.2)*sin(x)", first_t, last_t, incrementSize, initial_x, initial_y );      
 
         Double[] t_values = answers[0];
         Double[] x_values = answers[1];
         Double[] y_values = answers[2];
         
-        Frame frm = new Graph(t_values, x_values);
+        Frame frm = new Graph( t_values, x_values );
         frm.show();
 
-        FileWriter fw = null;
-        BufferedWriter bw = null;
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
 
         try {
-            fw = new FileWriter("text.csv");
-            bw = new BufferedWriter(fw);
+            fileWriter = new FileWriter( "text.csv" );
+            bufferedWriter = new BufferedWriter(fileWriter);
 
-            bw.write("t,x,y" + '\n');
+            bufferedWriter.write( "t,x,y" + '\n' );
 
-            for (int i = 0; i < t_values.length; i++) {
-                bw.write(t_values[i] + ", " + x_values[i] + ", " + y_values[i]+ '\n');
+            for ( int i = 0; i < t_values.length; i++ ) {
+                bufferedWriter.write( t_values[i] + ", " + x_values[i] + ", " + y_values[i]+ '\n' );
             }
         }
-        catch(IOException e) {
+        catch( IOException e ) {
             e.printStackTrace();
         }
         finally {
             try {
-                bw.close();
-                fw.close();
+                bufferedWriter.close();
+                fileWriter.close();
             }
-            catch (IOException f) {
+            catch ( IOException f ) {
             }
         }
-    }
+    } // End of main
 }
 
