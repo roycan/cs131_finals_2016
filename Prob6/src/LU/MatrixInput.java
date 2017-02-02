@@ -9,57 +9,56 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.table.*;
 
 /**
  * GUI for inputting Matrix A
+ * 
  * @author Faith Therese Pena - CS131 THR
  */
 public class MatrixInput {
 
 	public static void MatrixInput(int row, int col, double[][] A) {
-	    JFrame frame = new JFrame("Matrix Input");
-	    frame.setSize(400, 400);
+		JFrame frame = new JFrame("Matrix Input");
+		frame.setSize(400, 400);
 
-	    JPanel panel = new JPanel();
-	    panel.setLayout(new GridLayout(row,col));
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(row, col));
 
-	    List<JTextField> list = new ArrayList<JTextField>();
+		List<JTextField> list = new ArrayList<JTextField>();
 
-	    for (int i =0; i < row*col; i++) {
-	       JTextField textField = new JTextField(""+0);
-	       panel.add(textField);
-	       list.add(textField);
-	    }
+		for (int i = 0; i < row * col; i++) {
+			JTextField textField = new JTextField("" + 0);
+			panel.add(textField);
+			list.add(textField);
+		}
 
-	    JPanel panel1 = new JPanel();
-	    JButton jb = new JButton("Calculate");
-	    jb.setBounds(50,50,100,100);
+		JButton jb = new JButton("Calculate");
+		jb.setBounds(50, 50, 100, 100);
 
-	    frame.getContentPane().add(panel);
-	    frame.getContentPane().add(jb, BorderLayout.SOUTH);
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setVisible(true);
+		frame.getContentPane().add(panel);
+		frame.getContentPane().add(jb, BorderLayout.SOUTH);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 
-	    jb.addActionListener(new ActionListener() {
-	    	public void actionPerformed (ActionEvent e) {
-	    		int i = 0;
-	    		int j = 0;
-	    		for( JTextField f : list ) {
-				   A[i][j] = Double.parseDouble(f.getText());
-				   j++;
+		jb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = 0;
+				int j = 0;
+				for (JTextField f : list) {
+					A[i][j] = Double.parseDouble(f.getText());
+					j++;
 
-				   if(j == col) {
-				   	 i++;
-				   	 j = 0;
-				   }
+					if (j == col) {
+						i++;
+						j = 0;
+					}
 				}
 
 				System.out.println("Inside actionPerformed");
-	     		System.out.println(Arrays.deepToString(A));
-	     		main.flag=1;
-	     		frame.dispose();
-	    	}
-	    });
+				System.out.println(Arrays.deepToString(A));
+				main.flag = 1;
+				frame.dispose();
+			}
+		});
 	}
 }
