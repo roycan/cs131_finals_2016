@@ -214,7 +214,7 @@ public class Prob4GUI extends javax.swing.JFrame {
 
         dispose();
         Graph firstGraph = new Graph();
-        firstGraph.init(theXValues,theYValues,theTimeValues,theNumTimeIntervals,"Time (t)", "", "Lions and Gazelles");
+        firstGraph.setInitialGraphValues(theXValues,theYValues,theTimeValues,theNumTimeIntervals,"Time (t)", "", "Lions and Gazelles");
         
     }
 
@@ -223,7 +223,7 @@ public class Prob4GUI extends javax.swing.JFrame {
 
         dispose();
         Graph2 secondGraph = new Graph2();
-        secondGraph.init(theXValues,theYValues,theNumTimeIntervals,"Lions", "Gazelles", "Lions and Gazelles");
+        secondGraph.setInitialGraphValues(theXValues,theYValues,theNumTimeIntervals,"Lions", "Gazelles", "Lions and Gazelles");
     }
 
     /** Calls the components */

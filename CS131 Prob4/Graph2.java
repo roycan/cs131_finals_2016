@@ -43,7 +43,7 @@ public class Graph2 extends Application {
         lineChart.setTitle(theTitle);
                                 
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
-        for (int i=1; i<n+1; i++){
+        for (int i=1; i<theNumTimeIntervals+1; i++){
             series.getData().add(new XYChart.Data<Number, Number>(theXValues[i], theYValues[i]));
         }
         

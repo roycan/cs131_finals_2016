@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class Graph extends Application {
     private static Double[] theXValues, theYValues, theTimeValues;
     private static String theXAxisLabel, theYAxisLabel, theTitle;
-    private static double n;
+    private static double theNumTimeIntervals;
 
     public static void main(String[] args) {
         launch(args);
@@ -42,13 +42,13 @@ public class Graph extends Application {
                 
         lineChart.setTitle(theTitle);
                                 
-        XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
-        XYChart.Series<Number, Number> series1 = new XYChart.Series<Number, Number>();
+        XYChart.Series<Number, Number> xTimeSeries = new XYChart.Series<Number, Number>();
+        XYChart.Series<Number, Number> yTimeSeries = new XYChart.Series<Number, Number>();
         
-        series.setName("Lions");
-        series1.setName("Gazelles");
+        xTimeSeries.setName("Lions");
+        yTimeSeries.setName("Gazelles");
         
-        for (int i=1; i<n+1; i++){
+        for (int i=1; i<theNumTimeIntervals+1; i++){
             xTimeSeries.getData().add(new XYChart.Data<Number, Number>(theTimeValues[i], theXValues[i]));
             yTimeSeries.getData().add(new XYChart.Data<Number, Number>(theTimeValues[i], theYValues[i]));
         }
