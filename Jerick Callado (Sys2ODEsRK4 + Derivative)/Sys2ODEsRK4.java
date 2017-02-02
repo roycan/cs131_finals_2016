@@ -5,7 +5,7 @@ stores values in array x and array y
 */
 
 public class Sys2ODEsRK4{
-	public static void f(double n, double h, double[] x, double[] y, double[] t){
+	public static void f(double n, double h, Double[] x, Double[] y, Double[] t){
 		double Kx1, Ky1, Kx2, Ky2, Kx3, Ky3, Kx4, Ky4, tm;
 		
 		for(int i=1; i<n+1; i++){
