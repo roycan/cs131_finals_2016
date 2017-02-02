@@ -17,47 +17,47 @@ import javax.swing.table.*;
  */
 public class MatrixOutput extends JFrame implements ActionListener {
 
-	private CardLayout card;
-	private JButton b1, b2;
-	private static JPanel panelA = new JPanel();
-	private static JPanel panelB = new JPanel();
-	private static JPanel panel1 = new JPanel();
-	private static JPanel panel2 = new JPanel();
-	private Container c;
+	private CardLayout myCardLayout;
+	private JButton myBtn1, myBtn2;
+	private static JPanel thePanelA = new JPanel();
+	private static JPanel thePanelB = new JPanel();
+	private static JPanel thePanel1 = new JPanel();
+	private static JPanel thePanel2 = new JPanel();
+	private Container myContainer;
 
 	public MatrixOutput() {
-		c = getContentPane();
-		card = new CardLayout(40,30);
-		c.setLayout(card);
+		myContainer = getContentPane();
+		myCardLayout = new CardLayout(40,30);
+		myContainer.setLayout(myCardLayout);
 
-		b1 = new JButton("L");
-		b2 = new JButton("U");
-		b1.setBounds(50,50,200,200);
-		b2.setBounds(50,50,200,200);
-		b1.addActionListener(this);
-		b2.addActionListener(this);
+		myBtn1 = new JButton("L");
+		myBtn2 = new JButton("U");
+		myBtn1.setBounds(50,50,200,200);
+		myBtn2.setBounds(50,50,200,200);
+		myBtn1.addActionListener(this);
+		myBtn2.addActionListener(this);
 
-		panelA.add(panel1);
-		panelA.add(b1, BorderLayout.NORTH);
-		panelB.add(panel2);
-		panelB.add(b2, BorderLayout.NORTH);
+		thePanelA.add(thePanel1);
+		thePanelA.add(myBtn1, BorderLayout.NORTH);
+		thePanelB.add(thePanel2);
+		thePanelB.add(myBtn2, BorderLayout.NORTH);
 
-		c.add("L", panelA);
-		c.add("U", panelB);
+		myContainer.add("L", thePanelA);
+		myContainer.add("U", thePanelB);
 	}
 
 	public static void MatrixOutput(int rowL, int colL, int rowU, int colU, double[][] L, double[][] U) {
 		MatrixOutput cl = new MatrixOutput();
 
-		panel1.setLayout(new GridLayout(rowL, colL));
-		panel2.setLayout(new GridLayout(rowU, colU));
+		thePanel1.setLayout(new GridLayout(rowL, colL));
+		thePanel2.setLayout(new GridLayout(rowU, colU));
 
 		for (int i=0; i < rowL; i++) {
 			for (int j=0; j < colL; j++) {
 				JTextField textFieldL = new JTextField(""+L[i][j]);
 				textFieldL.setPreferredSize(new Dimension(50,50));
 				textFieldL.setEditable(false);
-				panel1.add(textFieldL);
+				thePanel1.add(textFieldL);
 			}
 		}
 
@@ -66,7 +66,7 @@ public class MatrixOutput extends JFrame implements ActionListener {
 				JTextField textFieldU = new JTextField(""+U[i][j]);
 				textFieldU.setPreferredSize(new Dimension(50,50));
 				textFieldU.setEditable(false);
-				panel2.add(textFieldU);
+				thePanel2.add(textFieldU);
 			}
 		}
 		cl.setSize(400,400);
@@ -75,6 +75,6 @@ public class MatrixOutput extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		card.next(c);
+		myCardLayout.next(myContainer);
 	}
 }

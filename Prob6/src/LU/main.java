@@ -5,9 +5,7 @@ package LU;
 */
 
 import java.io.*;
-import javax.swing.*;   
-import java.util.Arrays;
-
+import javax.swing.*;
 
 /* Runs the LUDecompCrout function, MatrixInput, MatrixOutput, and the
 creation of a .csv file containing the L and U matrices */
@@ -17,7 +15,7 @@ public class main {
 
     public static void main(String[] args) {
         main.flag = 0;
-            
+
         int row = Integer.parseInt(args[0]);
         int col = Integer.parseInt(args[1]);
         int rowL, colL, rowU, colU;
@@ -60,16 +58,16 @@ public class main {
                 BufferedWriter br = new BufferedWriter(new FileWriter("LU.csv"));
                 StringBuilder sb = new StringBuilder();
 
-                    
+
                 for(int i = 0; i < LUResult.length; i++) {
                     if (i == 0) {
                         sb.append("L\n");
                     } else {sb.append("U\n");}
                         double[][] temp = LUResult[i];
-                            
+
                         for(int j = 0; j < temp.length; j++) {
                             double[] temp1 = temp[j];
-                                    
+
                             for(int k = 0; k < temp1.length; k++) {
                                 sb.append(temp1[k]);
                                 sb.append(",");
@@ -77,15 +75,15 @@ public class main {
 
                             sb.append("\n");
                         }
-                            
+
                         sb.append("\n");
                     }
-                    
+
                 br.write(sb.toString());
                 br.close();
             } catch (IOException e) {
                 e.printStackTrace();
         }
     }
-           
+
 }
