@@ -3,109 +3,97 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-//Yao Faneallrich Li 201455331 12/5/2016 CS 131 THR
-//f is the function for the ODE function
-//g is the second function for the ODE Function
-//y0 is our y(0)
-//z0 is our z(0)
-// a is the initial bound
-// b is the upper bound of the system
-// h is the stepsize
-
-// modified by Lyon Lao on 12/13/2016
-// added dependency on mxparser.jar, a library obtained from http://mathparser.org/
 import org.mariuszgromada.math.mxparser.*;
+//Yao Faneallrich Li 201455331 12/5/2016 CS 131 THR
+// added dependency on mxparser.jar, a library obtained from http://mathparser.org/
+
 
 public class Sys2ODEsRK2 {
-  public static Double[][] calculate (String f, String g, Double y0, Double z0, Double a, Double b, Double h) {
-      Double n = (b-a)/h;
+    private static final double DEFAULT_LOWER_BOUND = 0;
+    private static final double DEFAULT_UPPER_BOUND = 0.1;
+    private static final double DEFAULT_STEP_SIZE = 0.01;
+  public static Double[][] calculate (String f, String g, Double y0, Double z0) {
+      return calculate(f, g, y0, z0, DEFAULT_LOWER_BOUND, DEFAULT_UPPER_BOUND, DEFAULT_STEP_SIZE);
 
-  	Double[] T = new Double[n.intValue() + 1];
-  	Double[] Y = new Double[n.intValue() + 1];
-  	Double[] Z = new Double[n.intValue() + 1];
+  }
+  public static Double[][] calculate (String f, String g, Double yValue, Double zValue, Double lowerBound, Double upperBound, Double stepSize) {
+      Double maxSteps = (upperBound-lowerBound)/stepSize;
 
-  	Double t = a;
-      Double y = y0;
-      Double z = z0;
+  	Double[] tValueArray = new Double[maxSteps.intValue() + 1];
+  	Double[] yValueArray = new Double[maxSteps.intValue() + 1];
+  	Double[] zValueArray = new Double[maxSteps.intValue() + 1];
 
-  	T[0] = t;
-      Y[0] = y;
-  	Z[0] = z;
+  	Double currentLowerBound = lowerBound;
 
-      for (int i = 1; i < n + 1; i++) {
-        t += h;
-        Double Ky1 = (new Expression(f, new Argument("x", t), new Argument("y", y), new Argument("z", z))).calculate();
-  	     Double Kz1 = (new Expression(g, new Argument("x", t), new Argument("y", y), new Argument("z", z))).calculate();
-        Double Ky2 = (new Expression(f, new Argument("x", t + h), new Argument("y", y + Ky1 * h), new Argument("z", z + Kz1 * h))).calculate();
-        Double Kz2 = (new Expression(g, new Argument("x", t + h), new Argument("y", y + Ky1 * h), new Argument("z", z + Kz1 * h))).calculate();
-        y += (h/2) * (Ky1+Ky2);
-  	  z += (h/2) * (Kz1+Kz2);
+  	tValueArray[0] = currentLowerBound;
+    yValueArray[0] = yValue;
+  	zValueArray[0] = zValue;
 
-  	  T[i] = t;
-        Y[i] = y;
-        Z[i] = z;
+      for (int i = 1; i < maxSteps + 1; i++) {
+        currentLowerBound += stepSize;
+		
+		Argument xCoefficient = new Argument("x", currentLowerBound);
+		Argument yCoefficient = new Argument("y", yValue);
+		Argument zCoefficient = new Argument("z", zValue);
+		
+		Expression functionKy1 = new Expression(f, xCoefficient, yCoefficient, zCoefficient);
+		Expression functionKz1 = new Expression(g, xCoefficient, yCoefficient, zCoefficient);
+		
+		Double Ky1 = functionKy1.calculate();
+		Double Kz1 = functionKz1.calculate();
+		
+		xCoefficient = new Argument("x", currentLowerBound + stepSize);
+		yCoefficient = new Argument("y", yValue + Ky1 * stepSize);
+		zCoefficient = new Argument("z", zValue + Kz1 * stepSize);
+		
+		Expression functionKy2 = new Expression(f, xCoefficient, yCoefficient, zCoefficient);
+		Expression functionKz2 = new Expression(g, xCoefficient, yCoefficient, zCoefficient);
+		
+        yValue += (stepSize/2) * (Ky1+functionKy2.calculate());
+        zValue += (stepSize/2) * (Kz1+functionKz2.calculate());
+
+  	    tValueArray[i] = currentLowerBound;
+        yValueArray[i] = yValue;
+        zValueArray[i] = zValue;
       }
 
-  	Double[][] result = {T, Y, Z};
+  	Double[][] result = {tValueArray, yValueArray, zValueArray};
   	return result;
   }
 
-  public static String toCsvString (Double[] t, Double[] y, Double[] z)
+  public static String toCsvString (Double[] tValuesArray, Double[] yValuesArray, Double[] zValuesArray)
   {
-    String retstr = new String();
-    retstr += "iteration,x value,y value,z value\n";
-    for (int i = 0; i < Math.min(t.length, Math.min(y.length, z.length)); i++)
+    String returnString = new String();
+    returnString += "iteration,x value,y value,z value\n";
+    int length = Math.min(tValuesArray.length, Math.min(yValuesArray.length, zValuesArray.length));
+    for (int i = 0; i < length; i++)
     {
-      retstr += Double.toString(i) + ',' + Double.toString(t[i]) + ',' + Double.toString(y[i]) + ',' + Double.toString(z[i]) + '\n';
+      returnString += Double.toString(i) + ',' + Double.toString(tValuesArray[i]) + ',' + Double.toString(yValuesArray[i]) + ',' + Double.toString(zValuesArray[i]) + '\n';
     }
-    return retstr;
+    return returnString;
   }
 
-  public static void printCsv(Double[] t, Double[] y, Double[] z)
+  public static void printCsv(Double[] tValues, Double[] yValues, Double[] zValues)
   {
-    printCsv("Sys2ODEsRK2.csv", t, y, z);
+    printCsv("Sys2ODEsRK2.csv", tValues, yValues, zValues);
   }
 
-  public static void printCsv(String filename, Double[] t, Double[] y, Double[] z)
+  public static void printCsv(String filename, Double[] tValuesArray, Double[] yValuesArray, Double[] zValuesArray)
   {
-    FileWriter pp = null;
+    FileWriter writer = null;
     try {
-      pp = new FileWriter(filename);
-
-      pp.append(toCsvString(t, y, z));
+      writer = new FileWriter(filename);
+      writer.append(toCsvString(tValuesArray, yValuesArray, zValuesArray));
     } catch(Exception e){
         e.printStackTrace();
     } finally {
         try{
-            pp.flush();
-            pp.close();
+            writer.flush();
+            writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
     }
   }
 
-  public static void main (String[] args) {
-    String fun1 = "x - y + z";
-  	String fun2 = "x + y + z";
-  	Double a;
-  	Double z;
-  	Double b;
-  	Double c;
-  	Double steps;
-  	Scanner s = new Scanner(System.in);
-  	System.out.println("Input Initial Value of y");
-      a = s.nextDouble();
-  	System.out.println("Input Initial Value of z");
-      z = s.nextDouble();
-  	System.out.println("Input the lower bound");
-  	b = s.nextDouble();
-  	System.out.println("Input the upper bound");
-  	c = s.nextDouble();
-  	System.out.println("Input stepsize");
-  	steps = s.nextDouble();
-      Double[][] result = calculate (fun1,fun2,a,z,b,c,steps);
-      System.out.println(Arrays.deepToString(result));
-      printCsv(result[0], result[1], result[2]);
-  }
 }
