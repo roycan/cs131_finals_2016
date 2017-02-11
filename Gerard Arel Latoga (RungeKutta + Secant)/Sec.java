@@ -1,67 +1,68 @@
-import org.mariuszgromada.math.mxparser.*;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.*;
+import org.mariuszgromada.math.mxparser.*;
 
 public class Sec {
-    static Function y; //the equation
-    static Argument yInit; //initial value of y
-    static Argument a; //first value of x
-    static Argument b; //last value of x
-    static Argument err; //step size;
-    static Argument imax; //max iters
-    static Expression FUN;
+    private Function myEquation; //the equation, y
+    private Argument myStartingX; //first value of x, a
+    private Argument myLastX; //last value of x, b
+    private Argument myStepSize; //step size, err
+    private Argument myMaxIterations; //max iters, imax
+    private double myAnswer;
 
-    double x_values[];
-    double y_values[];
-
-    double answer;
-
-    public static void main(String[] args) {
+    public Sec(String _eq, String _stX, String _lsX, String _sS, String _mI) {
+            myEquation = new Function(_eq);
+            myStartingX = new Argument(_stX);
+            myLastX = new Argument(_lsX);
+            myStepSize = new Argument(_sS);
+            myMaxIterations = new Argument(_mI);
+            calculateAnswer();
     }
 
-    public Sec(String _y, String _a, String _b, String _err, String _imax) {
-            y = new Function(_y);
-            a = new Argument(_a);;
-            b = new Argument(_b);
-            err = new Argument(_err);
-            imax = new Argument(_imax);
-            int i;
-            double Xa = a.getArgumentValue();
-            double Xb = b.getArgumentValue();
-            double Xi;
+    void calculateAnswer() {
+        int currentIterations;
+        double currentXValue;
+        double valueAtRangeEnd;
+        double rangeStart = myStartingX.getArgumentValue();
+        double rangeEnd = myLastX.getArgumentValue();
+        if (rangeStart <= 0 && 0 < rangeEnd) {
+            rangeStart = 0;
+        }
 
-            System.out.println((int)a.getArgumentValue());
+        if (myEquation.calculate(rangeStart) == 0
+        || myEquation.calculate(rangeEnd) == 0) {
+            myAnswer = 0;
+        }
 
-            if (Xa <= 0 && 0 < Xb) {
-                Xa = 0;
-            }
+        else {
+            for (currentIterations = 0;
+            currentIterations < (int) myMaxIterations.getArgumentValue();
+            currentIterations++){
+                valueAtRangeEnd = myEquation.calculate(rangeEnd);
+                currentXValue = rangeEnd - valueAtRangeEnd*(rangeStart-rangeEnd)
+                                /(myEquation.calculate(rangeStart) - valueAtRangeEnd);
+                System.out.println(myEquation.calculate(rangeStart));
 
-            if (y.calculate(Xa) == 0 || y.calculate(Xb) == 0) {
-                answer = 0;
-            }
-            else {
-                for (i = 0; i < (int) imax.getArgumentValue(); i++) {
-                    double FunXb = y.calculate(Xb);
-                    Xi = Xb - FunXb*(Xa-Xb)/(y.calculate(Xa) - FunXb);
-                    System.out.println(y.calculate(Xa));
-                    if (Math.abs((Xi - Xb) / Xb) < err.getArgumentValue()) {
-                        answer = Xi;
-                        break;
-                    }
-                    Xa = Xb;
-                    Xb = Xi;
+                if (Math.abs((currentXValue - rangeEnd) / rangeEnd) < myStepSize.getArgumentValue()) {
+                    myAnswer = currentXValue;
+                    break;
                 }
-                if (i == (int) imax.getArgumentValue()) {
-                    answer = Double.NaN;
-                }
+
+                rangeStart = rangeEnd;
+                rangeEnd = currentXValue;
+
             }
+            if (currentIterations == (int) myMaxIterations.getArgumentValue()) {
+                myAnswer = Double.NaN;
+            }
+        }
     }
 
-    double Answer() {
-        return answer;
+    double getRoot() {
+        return myAnswer;
     }
 }
