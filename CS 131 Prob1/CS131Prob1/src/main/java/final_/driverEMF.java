@@ -2,7 +2,7 @@
  * Created by Bautista, Besas, and Callado in 2016.
  */
 
-package final_modified;
+package final_;
 
 import org.mariuszgromada.math.mxparser.*;
 import org.math.plot.*;

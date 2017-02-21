@@ -2,7 +2,7 @@
  * Created by Clare on 12/8/2016.
  */
 
-package final_modified;
+package final_;
 
 import java.lang.*;
 import org.mariuszgromada.math.mxparser.*;
