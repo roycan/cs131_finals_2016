@@ -37,7 +37,7 @@ public class EulerModifiedFunctionTest {
 
         double[] actual = eulerModFunc.getyValues();
 
-        assertArrayEquals("Ode modified must past simple example", expected, actual, 0.00001);
+        assertArrayEquals("Ode modified must pass simple example", expected, actual, 0.00001);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class EulerModifiedFunctionTest {
 
         double[] actual = eulerModFunc.getyValues();
 
-        assertArrayEquals("Ode modified must past average example", expected, actual, 0.01);
+        assertArrayEquals("Ode modified must pass average example", expected, actual, 0.01);
 
     }
 
@@ -102,7 +102,7 @@ public class EulerModifiedFunctionTest {
 
         double[] actual = eulerModFunc.getyValues();
 
-        assertArrayEquals("Ode modified must past difficult example", expected, actual, 1);
+        assertArrayEquals("Ode modified must pass difficult example", expected, actual, 1);
     }
 
 }
