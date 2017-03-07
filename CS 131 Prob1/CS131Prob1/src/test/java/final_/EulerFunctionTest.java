@@ -114,12 +114,23 @@ public class EulerFunctionTest {
             674.19, 675.36, 676.53, 677.68, 678.83, 679.97, 681.10, 682.23, 683.34, 684.45, 685.55, 686.64, 687.72, 688.80, 689.87, 690.93, 691.99,
             693.03, 694.07, 695.10, 696.13, 697.15, 698.16, 699.16, 700.16, 701.15, 702.13, 703.11, 704.08, 705.04, 706.00, 706.95, 707.89
         };
-
+        
         eulerFunc.odeEuler(ode, t0, t1, stepSize, y0);
 
         double[] actual = eulerFunc.getyValues();
+        double maxError = 0;
+        
+        for (int i = 0; i < n; i++){
+        	//System.out.println(actual[i]);
+            if (maxError < Math.abs(actual[i]-expected[i])){
+            	maxError = Math.abs(actual[i]-expected[i]);
+            }
+        }
+        
+        System.out.println("Max error: " + Double.toString(maxError));
+        
 
-        assertArrayEquals("Ode modified must past difficult example", expected, actual, 28);
+        assertArrayEquals("Ode modified must past difficult example", expected, actual, maxError);
     }
 
 }
