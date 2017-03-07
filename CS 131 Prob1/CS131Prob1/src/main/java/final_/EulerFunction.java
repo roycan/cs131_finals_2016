@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014 Nokia Solutions and Networks. All rights reserved.
+ */
+
 /**
  * Created by Clare on 12/7/2016.
  */
@@ -32,6 +36,7 @@ public class EulerFunction {
         int n = ((int) Math.ceil((b-a)/h)) + 1;
         double [] xPoints = new double[n];
         double [] yPoints = new double[n];
+        
         xPoints[0] = a;
         yPoints[0] = yIni;
 

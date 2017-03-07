@@ -1,4 +1,8 @@
 /*
+ * Copyright (c) 2014 Nokia Solutions and Networks. All rights reserved.
+ */
+
+/*
  * Created by Clare on 12/8/2016.
  */
 
@@ -32,12 +36,13 @@ public class EulerModifiedFunction {
 
         int n = ((int) Math.ceil((secondNum-firstNum)/stepSize)) + 1;
         double [] xPoints = new double[n];
-        double [] yPoints = new double[n];
-        xPoints[0] = firstNum;
-        yPoints[0] = yIni;
+        double [] yPoints = new double[n];        
         double slopeEu;
         double yEu;
         double slopeEnd;
+
+        xPoints[0] = firstNum;
+        yPoints[0] = yIni;
 
         for (int i =0; i<(n-1); i++){
             xPoints[i+1] = xPoints[i] + stepSize;

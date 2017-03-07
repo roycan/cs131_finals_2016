@@ -1,4 +1,8 @@
 /*
+ * Copyright (c) 2014 Nokia Solutions and Networks. All rights reserved.
+ */
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -46,6 +50,9 @@ public class NewtonRoot
          *Overloaded convenience function for when func and funcDer is provided as a String expression for Func(x), Func'(x)
          */
 
+        double currEst;
+        int i;
+
         final Argument x = new Argument("x");
         final Argument y = new Argument("y = " + funcStr,x);
         Function func = new Function(){
@@ -68,8 +75,6 @@ public class NewtonRoot
             }
         };
 
-        double currEst;
-        int i;
         for(i = 0; i < iterMax; i++){
             currEst = solEst - func.f(solEst) / funcDer.f(solEst);
             if(Math.abs((currEst - solEst) / solEst) < maxErr || Math.abs(currEst) < maxErr){
