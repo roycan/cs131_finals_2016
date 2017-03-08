@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2014 Nokia Solutions and Networks. All rights reserved.
+ * Copyright (c) Department of Computer Science CS 131
+ * Numerical Methods class. All rights reserved.
  */
 
 /*
