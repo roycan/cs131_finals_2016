@@ -121,14 +121,10 @@ public class EulerFunctionTest {
         double maxError = 0;
         
         for (int i = 0; i < n; i++){
-        	//System.out.println(actual[i]);
             if (maxError < Math.abs(actual[i]-expected[i])){
             	maxError = Math.abs(actual[i]-expected[i]);
             }
         }
-        
-        System.out.println("Max error: " + Double.toString(maxError));
-        
 
         assertArrayEquals("Ode modified must past difficult example", expected, actual, maxError);
     }
