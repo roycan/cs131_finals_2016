@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb6292f2-747b-4055-bd3c-6c2adc92a01a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/CS131Prob1.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/libraries/Maven__com_github_yannrichet_JMathArray_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/libraries/Maven__com_github_yannrichet_JMathPlot_1_0_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/libraries/Maven__junit_junit_3_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/.project" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/CS131Prob1.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/bin/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/pom.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_/EulerFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_/EulerModifiedFunction.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_/driverEMF.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_implicit/EulerImplicit.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_implicit/Function.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/main/java/final_implicit/NewtonRoot.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/test/java/final_/EulerFunctionTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/test/java/final_/EulerModifiedFunctionTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/test/java/final_/driverEMFTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/test/java/final_implicit/EulerImplicitTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/src/test/java/final_implicit/NewtonRootTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/CS 131 Prob1/CS131Prob1/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="prob1.karg.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -678,12 +652,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1489476880890</updated>
-      <workItem from="1489476882263" duration="41000" />
+      <workItem from="1489476882263" duration="94000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41000" />
+    <option name="totallyTimeSpent" value="94000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
