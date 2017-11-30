@@ -1,7 +1,9 @@
+import java.util.Arrays;
+
 public class ForwardSub {
 	public static double[] ForwardSub(double[][] A, double[] b){
 		int D = A.length;
-		double[] x = new double[D][D];
+		double[] x = new double[D];
 
 		for (int i=0; i<D; i++) {
 			double temp = b[i];
@@ -12,7 +14,7 @@ public class ForwardSub {
 				else {temp -= x[j] * A[i][j];}
 			}
 		}
-
+		System.out.println(Arrays.toString(x));
 		return x;
 	}
 }
