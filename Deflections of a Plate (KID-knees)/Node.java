@@ -1,8 +1,7 @@
 public class Node {
-	public Node(double data, int i, int j) {
+	public Node(int i, int j) {
 		_i = i;
 		_j = j;
-		_data = data;
 	}
 
 	protected int _i, _j;
@@ -14,5 +13,13 @@ public class Node {
 
 	public int get_j() {
 		return _j;
+	}
+
+	public double get_data() {
+		return _data;
+	}
+
+	public void set_data(double data) {
+		_data = data;
 	}
 }
