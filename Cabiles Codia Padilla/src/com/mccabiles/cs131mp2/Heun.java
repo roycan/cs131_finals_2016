@@ -3,16 +3,17 @@ package com.mccabiles.cs131mp2;
 /*
 * ==================================
 * HEUN CLASS
-* - Solves ODE using Heun's method.
+*	Solves ODE using Heun's method.
 * ---------------------------------
 * USAGE:
 *		call method Heun.odeHeun( t0, y0, h, n )
+*
 * ARGUMENTS:
 *		t0 = initial t
 *		y0 = initial y at t=t0
 *		h = step size
 *		n = number of iterations
-* ---------------------------------
+*
 * RETURNS:
 *	2D array of [t][y] values
 * ==================================
@@ -20,7 +21,7 @@ package com.mccabiles.cs131mp2;
 
 public abstract class Heun {
 
-	public static double[][] odeHeun( double t0, double y0, double hsize, int n ) {
+	public static double[][] odeHeun( double t0, double y0, double hsize, int n, ODEFunction function ) {
 		
 		double[][] values = new double[n][2];
 		double f;
@@ -38,13 +39,13 @@ public abstract class Heun {
 			
 		/*
 		 * This part implements the actual algorithm: 
-		 * 		k0 = y0 + ( h x f(t0, y0) )
+		 * 		k0 = y0 + ( h * f(t0, y0) )
 		 * 		k1 = f( t0 + h, k0 )
 		 *		y = y0  + ( (h/2) * ( f( t0, y0 ) + k1 ) )
 		 */
-			f = Function.f( old_t, old_y );
+			f = function.f( old_t, old_y );
 			k0 = old_y + ( hsize * f );
-			k1 = Function.f( old_t + hsize, k0);
+			k1 = function.f( old_t + hsize, k0);
 			
 			new_y = old_y + ( (hsize / 2) * ( f + k1 ) );
 			new_t = old_t + hsize;

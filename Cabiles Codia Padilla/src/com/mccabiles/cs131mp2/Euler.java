@@ -3,16 +3,17 @@ package com.mccabiles.cs131mp2;
 /*
 * ==================================
 * EULER CLASS
-* - Solves ODE using Euler's method.
-* ---------------------------------
+* 	Solves ODE using Euler's method.
+* ----------------------------------
 * USAGE:
 *		call method Euler.odeEuler( t0, y0, h, n )
+*
 * ARGUMENTS:
 *		t0 = initial t
 *		y0 = initial y at t=t0
 *		h = step size
 *		n = number of iterations
-* ---------------------------------
+* 
 * RETURNS:
 *	2D array of [t][y] values
 * ==================================
@@ -20,7 +21,7 @@ package com.mccabiles.cs131mp2;
 
 public abstract class Euler {
 	
-	public static double[][] odeEuler( double t0, double y0, double hsize, int n ) {
+	public static double[][] odeEuler( double t0, double y0, double hsize, int n, ODEFunction function ) {
 		
 		double[][] values = new double[n][2];
 		double f; 
@@ -39,7 +40,7 @@ public abstract class Euler {
 		 * This part implements the actual algorithm: 
 		 *		y = y0  + ( h * f( t0, y0) )
 		 */
-			f = Function.f( old_t, old_y );		
+			f = function.f( old_t, old_y );		
 			new_y = old_y + (f * hsize);
 			new_t = old_t + hsize;
 			
