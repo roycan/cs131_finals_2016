@@ -68,7 +68,7 @@ ode: your ODEFunction object
 
 ### Example
 ```
-import com.mccabiles.cs131mp2.*;
+import com.jcjcjp.cs131mp2.*;
 
 // Define your ODEFunction class and override f( t, y ):
 class myODE implements ODEFunction
