@@ -1,17 +1,18 @@
-package com.mccabiles.cs131mp2;
+package com.jcjcjp.cs131mp2;
 
-import com.mccabiles.cs131mp2.Euler;
+import com.jcjcjp.cs131mp2.Euler;
 
 /*
  * ==================================
  * MAIN FUNCTION
  * This serves as a template or guide for the use of the library.
- * 
+ * ---------------------------------
  * USAGE: 
- * 1. Define your ODE by implementing the ODEFunction interface and overriding its f( t, y ) method.
- * 2. Set initial values and instantiate your ODE object.
- * 3. Call the methods with the initial values as arguments.
- * 
+ * 1. Define your ODE by implementing the ODEFunction interface.
+ * 2. Override the f( t, y ) method with the function you will use.
+ * 3. Instantiate your ODE object.
+ * 4. Call the methods with the initial values and the ODE object as arguments.
+ * ---------------------------------
  * METHOD CALLS:
  * 		> Euler.odeEuler( t, y, h, n, function )
  * 		> Heun.odeHeun( t, y, h, n, function )
@@ -24,9 +25,9 @@ import com.mccabiles.cs131mp2.Euler;
  * 			function = ODE object
  * ==================================
  */
-
-class myODEFunction implements ODEFunction {
 	
+class myODEFunction implements ODEFunction
+{
 	@Override
 	public double f(double t, double y) 
 	{
@@ -39,17 +40,21 @@ class myODEFunction implements ODEFunction {
 }
 
 
-public class Main {
+public class Main
+{
 	
 	public static void main(String[] args) {
 
-	// Set the Initial Values here:
+	// Set the arguments:
 		double t0 = 0;
 		double y0 = 1;
 		double h = 0.1;
 		int n = 4;
-		myODEFunction function = new myODEFunction();
 		
+	// Instantiate your ODE:
+		myODEFunction function = new myODEFunction();
+	
+	// Call the methods:	
 		System.out.println("Euler: ");
 		Euler.odeEuler(t0, y0, h, n, function);
 		

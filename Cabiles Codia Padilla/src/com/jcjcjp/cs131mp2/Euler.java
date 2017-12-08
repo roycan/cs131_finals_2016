@@ -1,4 +1,4 @@
-package com.mccabiles.cs131mp2;
+package com.jcjcjp.cs131mp2;
 
 /*
 * ==================================
@@ -6,22 +6,25 @@ package com.mccabiles.cs131mp2;
 * 	Solves ODE using Euler's method.
 * ----------------------------------
 * USAGE:
-*		call method Euler.odeEuler( t0, y0, h, n )
+*		> Euler.odeEuler( t0, y0, h, n, f )
 *
 * ARGUMENTS:
 *		t0 = initial t
 *		y0 = initial y at t=t0
 *		h = step size
 *		n = number of iterations
+*		f = ODEFunction object
 * 
 * RETURNS:
 *	2D array of [t][y] values
 * ==================================
 */
 
-public abstract class Euler {
+public abstract class Euler
+{
 	
-	public static double[][] odeEuler( double t0, double y0, double hsize, int n, ODEFunction function ) {
+	public static double[][] odeEuler( double t0, double y0, double hsize, int n, ODEFunction function )
+	{
 		
 		double[][] values = new double[n][2];
 		double f; 
@@ -30,7 +33,8 @@ public abstract class Euler {
 		double old_t = t0;
 		double old_y = y0;
 		
-		for ( int i = 0; i < n; i++ ) {
+		for ( int i = 0; i < n; i++ )
+		{
 			
 			print( "y: " + Double.toString(old_y) );
 			print( "t: " + Double.toString(old_t) );
@@ -55,7 +59,8 @@ public abstract class Euler {
 		return values;
 	}
 	
-	private static void print( String string ) {
+	private static void print( String string )
+	{
 		System.out.println( string );
 	}
 }
