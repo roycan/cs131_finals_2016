@@ -1,103 +1,64 @@
 import java.util.Arrays;
-
+import java.util.Scanner;
 
 public class main {
-	public static void main(String[] args) {
-		double h = 0.5;
-		double l = 2;
-		int row = (int) 3;
-		int column = (int) 3;
-		int length = (column*row);
-		int j = 1, k = 1;
-		double q = 33.6/18.32;//constant placeholder
+    public static void main(String[] args) {
+        Scanner user_input = new Scanner(System.in);
+        System.out.print("Enter the x-axis length: ");
+        float lx = user_input.nextFloat();
+        System.out.print("Enter the y-axis length: ");
+        float ly = user_input.nextFloat();
+        System.out.print("Enter the delta x/y (equal dx & dy): ");
+        float h = user_input.nextFloat();
+        System.out.print("Enter the load: ");
+        double q = user_input.nextDouble();
+        System.out.print("Enter the thickness: ");
+        double dz = user_input.nextDouble();
+        System.out.print("Enter the Poisson's ratio: ");
+        double sigma = user_input.nextDouble();
+        System.out.print("Enter the Modulus of Elasticity: ");
+        double E = user_input.nextDouble();
 
-		Node[] u = new Node[length];
-		double[] b = new double[length];
-		double[][] A = new double[length][length];
+        double qD = q / ((E * dz*dz*dz) / (12 * (1 - (sigma*sigma))));
 
-		for(int i=0; i<length; i++) {
-			u[i] = new Node(j, k);
-			k++;
-			if(k>column) {
-				k = 1;
-				j++;
-			}
-		}
+        double[] bounds = {0, 0, 0, 0};
+        // bounds[0] top
+        // bounds[1] bottom
+        // bounds[2] left
+        // bounds[3] right
 
-		double[] bounds = {0, 0, 0, 0};
-		// bounds[0] top
-		// bounds[1] bottom
-		// bounds[2] left
-		// bounds[3] right
+        Node[] u = EllipticPDE.Node_setup(lx, ly, h);
+        double[][] A = EllipticPDE.A(u);
+        double[] b = EllipticPDE.b(u, bounds, qD, h);
 
-		for(int i=0; i<length; i++) {
-			//Setup b
-			b[i] = q * h * h;
 
-			if(u[i].get_i() == 1) {
-				b[i] -= bounds[0];
-			}
+        
+        for(int i=0; i<A.length; i++) {
+            System.out.println(Arrays.toString(A[i]));
+        }
 
-			else if(u[i].get_i() == row) {
-				b[i] -= bounds[1];
-			}
+        System.out.println(Arrays.toString(b));
 
-			if(u[i].get_j() == 1) {
-				b[i] -= bounds[2];
-			}
+        double[][][] LU = LUdecompCrout.LU(A);
 
-			else if(u[i].get_j() == column) {
-				b[i] -= bounds[3];
-			}
+        double[] s = ForwardSub.FS(LU[0], b);
+        double[] ans = BackwardSub.BS(LU[1], s);
 
-			//Setup A
-			for(j=0; j<length; j++) {
-				if(i == j) {
-					A[i][i] = -4;
-				}
+        //for(int i=0; i<length; i++) {
+        //  System.out.println(Arrays.toString(LU[0][i]));
+        //}
 
-				else if ((u[i].get_i()+1 == u[j].get_i() || u[i].get_i()-1 == u[j].get_i()) && u[i].get_j() == u[j].get_j()) {
-					A[i][j] = 1;
-				}
+        //for(int i=0; i<length; i++) {
+        //  System.out.println(Arrays.toString(LU[1][i]));
+        //}
 
-				else if ((u[i].get_j()+1 == u[j].get_j() || u[i].get_j()-1 == u[j].get_j()) && u[i].get_i() == u[j].get_i()) {
-					A[i][j] = 1;
-				}
+        System.out.println(Arrays.toString(ans));
 
-				else {
-					A[i][j] = 0;
-				}
-			}
-		}
-		for(int i=0; i<length; i++) {
-			System.out.println(Arrays.toString(A[i]));
-		}
+        b = EllipticPDE.b(u, ans, h);
 
-		System.out.println(Arrays.toString(b));
+        s = ForwardSub.FS(LU[0], b);
+        ans = BackwardSub.BS(LU[1], s);
 
-		double[][][] LU = LUdecompCrout.LU(A);
-
-		double[] s = ForwardSub.FS(LU[0], b);
-		double[] ans = BackwardSub.BS(LU[1], s);
-
-		//for(int i=0; i<length; i++) {
-		//	System.out.println(Arrays.toString(LU[0][i]));
-		//}
-
-		//for(int i=0; i<length; i++) {
-		//	System.out.println(Arrays.toString(LU[1][i]));
-		//}
-
-		System.out.println(Arrays.toString(ans));
-
-		for(int i=0; i<length; i++) {
-			//Setup b
-			b[i] = ans[i] * h * h;
-		}
-
-		s = ForwardSub.FS(LU[0], b);
-		ans = BackwardSub.BS(LU[1], s);
-
-		System.out.println(Arrays.toString(ans));
-	}
+        System.out.println(Arrays.toString(ans));
+    }
 }
