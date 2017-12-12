@@ -4,18 +4,14 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-<<<<<<< HEAD
-		float[] input = new float[7];
+		//float[] input = new float[7];
 		double[][]output = new double[2][512];
 		
-	    GUInput.GUInput(input);
+	    //GUInput.GUInput(input);
 		
-		/*Scanner user_input = new Scanner(System.in);
-=======
+		
         Scanner user_input = new Scanner(System.in);
-
         //Input the constants
->>>>>>> 5105798b1709c165f7b5a88e943ad6e9335a544e
         System.out.print("Enter the x-axis length: ");
         float lx = user_input.nextFloat();
         System.out.print("Enter the y-axis length: ");
@@ -29,8 +25,8 @@ public class main {
         System.out.print("Enter the Poisson's ratio: ");
         double sigma = user_input.nextDouble();
         System.out.print("Enter the Modulus of Elasticity: ");
-        double E = user_input.nextDouble();*/
-		System.out.println("input:");
+        double E = user_input.nextDouble();
+		/*System.out.println("input:");
 		for(int i=0; i<input.length; i++) {
             System.out.println(input[i]);
         }
@@ -40,7 +36,7 @@ public class main {
 		float q = input[3];
 		float dz = input[4];
 		float sigma = input[5];
-		float E = input[6];
+		float E = input[6];*/
 
         //Calculate the constant 'q/D'
         double qD = q / ((E * dz*dz*dz) / (12 * (1 - (sigma*sigma))));
