@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+/* This function solves for 'x' given and 'A' & 'b' using Forward substition.
+Assumes that 'A' is and lower triangular matrix*/
 public class ForwardSub {
 	public static double[] FS(double[][] A, double[] b){
 		int D = A.length;
