@@ -1,3 +1,4 @@
+//The Node class is used by EllipticPDE.java to represent the different points on the plate.
 public class Node {
 	public Node(int i, int j) {
 		_i = i;
@@ -5,7 +6,6 @@ public class Node {
 	}
 
 	protected int _i, _j;
-	protected double _data;
 
 	public int get_i() {
 		return _i;
@@ -13,13 +13,5 @@ public class Node {
 
 	public int get_j() {
 		return _j;
-	}
-
-	public double get_data() {
-		return _data;
-	}
-
-	public void set_data(double data) {
-		_data = data;
 	}
 }

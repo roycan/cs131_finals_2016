@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+/* This function solves for 'x' given and 'A' & 'b' using backward substition.
+Assumes that 'A' is and upper triangular matrix*/
 public class BackwardSub {
 	public static double[] BS(double[][] A, double[] b){
 		int D = A.length;

@@ -4,12 +4,18 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
+<<<<<<< HEAD
 		float[] input = new float[7];
 		double[][]output = new double[2][512];
 		
 	    GUInput.GUInput(input);
 		
 		/*Scanner user_input = new Scanner(System.in);
+=======
+        Scanner user_input = new Scanner(System.in);
+
+        //Input the constants
+>>>>>>> 5105798b1709c165f7b5a88e943ad6e9335a544e
         System.out.print("Enter the x-axis length: ");
         float lx = user_input.nextFloat();
         System.out.print("Enter the y-axis length: ");
@@ -36,14 +42,17 @@ public class main {
 		float sigma = input[5];
 		float E = input[6];
 
+        //Calculate the constant 'q/D'
         double qD = q / ((E * dz*dz*dz) / (12 * (1 - (sigma*sigma))));
 
+        //Since the metal plate is supported on all edges, the value for the bounds are 0
         double[] bounds = {0, 0, 0, 0};
         // bounds[0] top
         // bounds[1] bottom
         // bounds[2] left
         // bounds[3] right
 
+        //Using EllipticPDE class to setup 'Ax=b' to solve for 'u'
         Node[] u = EllipticPDE.Node_setup(lx, ly, h);
         double[][] A = EllipticPDE.A(u);
         double[] b = EllipticPDE.b(u, bounds, qD, h);
@@ -56,8 +65,8 @@ public class main {
 
         System.out.println(Arrays.toString(b));
 
+        //Uses LU decomposition to solve the obtained 'Ax=b'
         double[][][] LU = LUdecompCrout.LU(A);
-
         double[] s = ForwardSub.FS(LU[0], b);
         double[] ans = BackwardSub.BS(LU[1], s);
 
@@ -72,8 +81,8 @@ public class main {
         System.out.println(Arrays.toString(ans));
 		output[0] = ans;
 
-        b = EllipticPDE.b(u, ans, h);
-
+        //Using the obtained values for 'u', we now set up a 'b' to solve for 'z'
+        b = EllipticPDE.b(u, bounds, ans, h);
         s = ForwardSub.FS(LU[0], b);
         ans = BackwardSub.BS(LU[1], s);
 
