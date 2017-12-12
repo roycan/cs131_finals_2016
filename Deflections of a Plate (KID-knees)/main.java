@@ -1,9 +1,15 @@
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) {
-        Scanner user_input = new Scanner(System.in);
+		float[] input = new float[7];
+		double[][]output = new double[2][512];
+		
+	    GUInput.GUInput(input);
+		
+		/*Scanner user_input = new Scanner(System.in);
         System.out.print("Enter the x-axis length: ");
         float lx = user_input.nextFloat();
         System.out.print("Enter the y-axis length: ");
@@ -17,7 +23,18 @@ public class main {
         System.out.print("Enter the Poisson's ratio: ");
         double sigma = user_input.nextDouble();
         System.out.print("Enter the Modulus of Elasticity: ");
-        double E = user_input.nextDouble();
+        double E = user_input.nextDouble();*/
+		System.out.println("input:");
+		for(int i=0; i<input.length; i++) {
+            System.out.println(input[i]);
+        }
+		float lx = input[0];
+		float ly = input[1];
+		float h = input[2];
+		float q = input[3];
+		float dz = input[4];
+		float sigma = input[5];
+		float E = input[6];
 
         double qD = q / ((E * dz*dz*dz) / (12 * (1 - (sigma*sigma))));
 
@@ -53,6 +70,7 @@ public class main {
         //}
 
         System.out.println(Arrays.toString(ans));
+		output[0] = ans;
 
         b = EllipticPDE.b(u, ans, h);
 
@@ -60,5 +78,8 @@ public class main {
         ans = BackwardSub.BS(LU[1], s);
 
         System.out.println(Arrays.toString(ans));
+		output[1] = ans;
+		
+		GUIoutput.GUIoutput(output);
     }
 }
