@@ -31,7 +31,7 @@ public class Graphs extends Application {
         NumberAxis ySeries = new NumberAxis();
         NumberAxis xPhase = new NumberAxis();
         NumberAxis yPhase = new NumberAxis();
-        xSeries.setLabel("Time (t) in seconds");
+        xSeries.setLabel("Time (t)");
         ySeries.setLabel("Population");
         xPhase.setLabel("Prey population");
         yPhase.setLabel("Predator population");
