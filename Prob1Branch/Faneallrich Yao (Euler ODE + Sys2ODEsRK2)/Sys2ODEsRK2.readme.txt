@@ -1,0 +1,13 @@
+The PRogram uses the Runge Kutta 2nd order for Systems of ODEs
+IN order to use the Sys2ODEsRK2 class
+compile it along with the Function2.java file where Function2.java is the 1st ode Function of the system.
+Also, additionally, with Function2_1.java where Function2_1.java is the second ode Function of the system.
+
+
+
+to compile:
+javac Sys2ODEsRK2.java Function2.java Function2_1.java
+
+to run
+
+java Sys2ODEsRK2 

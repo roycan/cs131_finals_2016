@@ -1,0 +1,27 @@
+Kerwin Delos Santos
+2012-62449
+
+1.)
+a.) Mass Density is simply density. It is the amount of mass or amount of material present
+in a given volume. In this case, what is being referred to is the density of the metal plate.
+
+b.) Specific heat is the amount of heat energy required to raise the temperature of a particular
+material in relation to its mass. In the case of the problem, it would take 900 joules to raise
+the temperature of 1 kg of the plate by 1 kelvin.
+
+c.) Radiative emissivity is the measure of effectiveness of an object to release its energy through
+radiation. In the problem, we are concerned with the amount of heat being emitted to the surroundings.
+
+d.) The Stefan-Boltzmann constant is the proportion between the temperature and the amount of energy
+being released. This covers the release of energy through other wavelengths.
+
+e.) Josef Stefan is a Austrian physicist who is best known for Stefan's Law which relates the total
+radiation emitted by an object to its temperature. Ludwig Boltzmann is his student and together
+they were able to extend the law to include other types of objects, thus creating the Stefan-Boltzmann
+law.
+
+f.) The symbol for T_infinity is a good symbol since as time goes on, the temperature of the plate
+should eventually reach ambient temperature.
+
+2-3.) The graph generated using RK4 does look similar to the given graph, however the downward slope
+does not seem to be as deep.
